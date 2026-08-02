@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graft — build the workout the way it's written</title>
+<meta name="description" content="A training app for functional fitness. Build EMOM, AMRAP, Tabata, For Time and strength work, then run it. No account. Nothing leaves your phone.">
+<link rel="icon" href="assets/graft-icon.png">
+<link rel="apple-touch-icon" href="assets/graft-icon.png">
+<meta property="og:title" content="Graft">
+<meta property="og:description" content="Build the workout the way it's actually written — then run it. No account, nothing leaves your phone.">
+<meta property="og:image" content="https://gotgraft.com/assets/graft-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gotgraft.com/">
+<link rel="canonical" href="https://gotgraft.com/">
+<meta name="theme-color" content="#06091A">
+<style>
+  /* Palette lifted from the app's own tokens (Graft/Theme) rather than
+     approximated: cobalt accent on blue-biased neutrals, both themes. */
+  :root{
+    --bg:#EFF2FA; --surface:#F5F7FD; --card:#F8FAFD; --elevated:#EBEFF7;
+    --fg:#0B1020; --muted:#525d78; --faint:#7c86a0; --rule:#dbe1ef;
+    --accent:#2A5FE0; --mint:#1F9E92;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#06091A; --surface:#0D1329; --card:#141B38; --elevated:#1A2246;
+      --fg:#eaeefb; --muted:#98a3c2; --faint:#6d789a; --rule:#1e2745;
+      --accent:#5B8FFF; --mint:#7BC9BB;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#06091A; --surface:#0D1329; --card:#141B38; --elevated:#1A2246;
+    --fg:#eaeefb; --muted:#98a3c2; --faint:#6d789a; --rule:#1e2745;
+    --accent:#5B8FFF; --mint:#7BC9BB;
+  }
+  :root[data-theme="light"]{
+    --bg:#EFF2FA; --surface:#F5F7FD; --card:#F8FAFD; --elevated:#EBEFF7;
+    --fg:#0B1020; --muted:#525d78; --faint:#7c86a0; --rule:#dbe1ef;
+    --accent:#2A5FE0; --mint:#1F9E92;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:740px;margin:0 auto;padding:0 24px}
+  a{color:var(--accent)}
+
+  .nav{display:flex;align-items:center;gap:10px;padding:26px 0}
+  .nav img{width:clamp(180px,30vw,260px);height:auto;display:block}
+
+  header{padding:44px 0 68px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
+  .tile{width:112px;height:112px;border-radius:25px;overflow:hidden;flex-shrink:0;
+    box-shadow:0 10px 34px rgba(6,9,26,.30);border:1px solid var(--rule)}
+  .tile img{width:100%;height:100%;display:block}
+  h1{font-size:clamp(32px,5.6vw,46px);line-height:1.1;letter-spacing:-.028em;margin:0 0 16px;text-wrap:balance}
+  .lede{font-size:clamp(18px,2.2vw,20px);color:var(--muted);margin:0;max-width:36em}
+  .cta-row{margin-top:30px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+  .cta{display:inline-block;background:var(--accent);color:#fff;padding:14px 28px;
+    border-radius:11px;text-decoration:none;font-weight:600}
+  .cta:hover{filter:brightness(1.08)}
+  .cta:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+  .note{font-size:15px;color:var(--faint);margin:0}
+
+  section{padding:56px 0;border-top:1px solid var(--rule)}
+  h2{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--faint);margin:0 0 30px}
+  .feature{margin-bottom:34px}
+  .feature:last-child{margin-bottom:0}
+  h3{font-size:21px;letter-spacing:-.012em;margin:0 0 8px}
+  .feature p{margin:0;color:var(--muted)}
+
+  .privacy{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:30px}
+  .privacy h3{margin-top:0}
+  .privacy ul{margin:16px 0 0;padding-left:20px;color:var(--muted)}
+  .privacy li{margin-bottom:7px}
+  .privacy li::marker{color:var(--mint)}
+  .privacy .more{margin:20px 0 0}
+  .privacy .more a{font-weight:600;text-decoration:none}
+
+  footer{padding:46px 0 76px;border-top:1px solid var(--rule);color:var(--faint);font-size:15px}
+  .foot-links{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:18px}
+  .foot-links a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--rule)}
+  .foot-links a:hover{border-color:var(--accent)}
+  @media (max-width:600px){
+    header{grid-template-columns:1fr;gap:24px}
+    .tile{width:88px;height:88px;border-radius:20px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="nav"><img src="assets/graft-wordmark.svg" alt="Graft" width="1387" height="416"></div>
+
+  <header>
+    <div class="tile"><img src="assets/graft-icon.png" alt=""></div>
+    <div>
+      <h1>Build the workout the way it's actually written.</h1>
+      <p class="lede">
+        Graft is a training app for functional fitness. EMOM, AMRAP, Tabata, For Time,
+        intervals, progressive strength work — you build the structure, and the app runs
+        it with you.
+      </p>
+      <div class="cta-row">
+        <a class="cta" href="#">Download on the App Store</a>
+        <p class="note">iPhone · iOS 17+ · No account, no sign-up, nothing leaves your phone.</p>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <h2>What it does</h2>
+
+    <div class="feature">
+      <h3>Build it properly</h3>
+      <p>
+        Start from a format and fill in the work. Rounds, work and rest windows, time caps,
+        sets and reps, weights, bands, distances, calories. Group movements into supersets
+        and complexes. String blocks together into a full session with rest between them —
+        the way a session is written on a whiteboard, not the way a form wants it.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>Run it</h3>
+      <p>
+        A live screen that keeps up with the workout instead of making you keep up with it.
+        Round-by-round intervals with work and rest windows. Self-paced AMRAPs against a cap.
+        Strength sets with rest timers between them. Individual movements inside a complex get
+        their own timer, so a 40-second hold is measured rather than assumed.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>Record what actually happened</h3>
+      <p>
+        Graft records what you did, not what you were told to do. Change a weight mid-set and
+        that is what is logged. Cut a hold short and it records the seconds you held. Rest that
+        ran long is recorded as the rest you took. Your history is a record, not a wish.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>Heart rate, no subscription</h3>
+      <p>
+        Pairs with any standard Bluetooth heart rate strap. Live BPM while you work, with the
+        session's average and peak on the summary afterwards.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Privacy</h2>
+    <div class="privacy">
+      <h3>There is no account because there is no server.</h3>
+      <p style="color:var(--muted);margin:0">
+        This is not a policy that could be reversed in an update. It is how the app is built:
+      </p>
+      <ul>
+        <li>No analytics, no tracking, no advertising identifiers</li>
+        <li>No third-party SDKs</li>
+        <li>No network requests — there is no networking code in the app</li>
+        <li>Your workouts, history and heart rate data stay on your device</li>
+      </ul>
+      <p class="more"><a href="privacy.html">Read the privacy policy →</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="mailto:grahamegee+graft@gmail.com">Support</a>
+    </div>
+    <div>© 2026 Grahame Gardiner. Graft is not affiliated with, endorsed by, or connected to
+    HYROX or CrossFit, Inc.</div>
+  </footer>
+
+</div>
+</body>
+</html>
