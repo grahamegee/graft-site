@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Graft workout</title>
+<meta property="og:title" content="A Graft workout">
+<meta property="og:description" content="Open it in Graft to add it to your library.">
+<meta property="og:image" content="https://gotgraft.com/assets/graft-icon.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/graft-icon.png">
+<style>
+  body{font:16px/1.5 -apple-system,system-ui,sans-serif;margin:0;padding:32px 16px;
+       background:#06091A;color:#eaeefb}
+  main{max-width:560px;margin:0 auto}
+  code{word-break:break-all;color:#98a3c2}
+</style>
+</head>
+<body>
+<main>
+  <h1>A Graft workout</h1>
+  <p>You're seeing this page because the link opened in the browser, not in Graft.</p>
+  <p id="report">No workout in this link.</p>
+</main>
+<script>
+  // Spike placeholder: reports what reached the browser. The fragment
+  // (after #) is never sent to this server.
+  const hash = location.hash.slice(1);
+  if (hash) {
+    const parts = hash.split(".");
+    const payload = parts.slice(2).join(".");
+    const declared = parseInt(parts[1], 10);
+    document.getElementById("report").textContent =
+      (payload.length === declared ? "Intact" : "Truncated") +
+      ": payload " + payload.length + " of " + declared + " characters.";
+  }
+</script>
+</body>
+</html>

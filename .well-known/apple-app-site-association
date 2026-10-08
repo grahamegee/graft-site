@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "HG54AAX442.com.grahame.graft",
+          "HG54AAX442.com.grahame.graft.dev"
+        ],
+        "components": [
+          { "/": "/w/*", "comment": "A shared workout; the workout rides in the fragment" }
+        ]
+      }
+    ]
+  }
+}
