@@ -1,0 +1,29 @@
+// expect: shape: `builtIn` is `false` instead of being left out
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"],
+        // invalid: `false`; writers leave `builtIn` out for the user's own exercises
+        "builtIn": false
+      },
+      "sets": 1,
+      "targetType": "reps"
+    }
+  ]
+}

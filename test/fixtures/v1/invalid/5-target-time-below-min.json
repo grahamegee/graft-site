@@ -1,0 +1,29 @@
+// expect: outOfRange: a time target is below the minimum of 1 s
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["time"],
+        "loads": ["bodyweight"]
+      },
+      "sets": 1,
+      "targetType": "time",
+      // invalid: half a second, under the 1 s minimum
+      "target": { "kind": "time", "value": 0.5 }
+    }
+  ]
+}

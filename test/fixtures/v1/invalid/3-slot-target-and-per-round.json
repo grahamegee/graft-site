@@ -1,0 +1,42 @@
+// expect: shape: a slot has both `target` and `targetPerRound`
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "7d3c5e2a-91f4-4b8e-a06d-2f5c8b1e4d97",
+        "name": "Squat Complex",
+        "category": "strength",
+        "components": [
+          {
+            "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+            "name": "Squat",
+            "category": "strength",
+            "targets": ["reps"],
+            "loads": ["bodyweight"]
+          }
+        ]
+      },
+      "sets": 2,
+      "targetType": "reps",
+      "slots": [
+        {
+          "targetType": "reps",
+          "target": { "kind": "reps", "value": 5 },
+          // invalid: `targetPerRound` alongside `target` in a slot
+          "targetPerRound": [{ "kind": "reps", "value": 5 }, { "kind": "reps", "value": 5 }]
+        }
+      ]
+    }
+  ]
+}

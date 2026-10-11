@@ -1,0 +1,48 @@
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "name": "Example EMOM",
+  "tags": ["example"],
+  "base": "interval",
+  "format": {
+    "name": "EMOM",
+    "timing": {
+      "kind": "interval",
+      "rounds": { "kind": "open", "default": 10 },
+      "work": { "kind": "locked", "value": 60 },
+      "rest": { "kind": "hidden" }
+    }
+  },
+  "rounds": 10,
+  "work": 60,
+  "rows": [
+    {
+      "exercise": {
+        "id": "62abb992-4219-5f40-4026-09c7a989e2ee",
+        "name": "Burpee",
+        "category": "power",
+        "tags": ["full body"],
+        "targets": ["reps"],
+        "loads": ["bodyweight"],
+        "builtIn": true
+      },
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 8 }
+    },
+    {
+      "exercise": {
+        "id": "9464319e-ba0a-6047-3084-49dd54980595",
+        "name": "Kettlebell Swing",
+        "category": "strength",
+        "tags": ["hamstrings", "glutes", "core"],
+        "targets": ["reps"],
+        "loads": ["weight"],
+        "builtIn": true
+      },
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 12 },
+      "load": { "kind": "weight", "value": 24, "unit": "kg" }
+    }
+  ]
+}

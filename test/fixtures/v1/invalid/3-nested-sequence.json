@@ -1,0 +1,10 @@
+// expect: shape: a sequence contains another sequence
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "sequence",
+  "items": [
+    // invalid: a sequence inside a sequence
+    { "kind": "sequence", "items": [] }
+  ]
+}

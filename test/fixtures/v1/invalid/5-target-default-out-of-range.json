@@ -1,0 +1,29 @@
+// expect: outOfRange: a reps default is below the minimum of 1
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    },
+    // invalid: a reps default of 0
+    "targetDefaults": { "reps": 0 }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "sets": 1,
+      "targetType": "reps"
+    }
+  ]
+}

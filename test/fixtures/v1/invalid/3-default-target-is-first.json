@@ -1,0 +1,29 @@
+// expect: shape: `defaultTarget` is present but is the first of `targets`
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        // invalid: "reps" is already the first of `targets`, so a writer leaves it out
+        "defaultTarget": "reps",
+        "loads": ["bodyweight"]
+      },
+      "sets": 1,
+      "targetType": "reps"
+    }
+  ]
+}

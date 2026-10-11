@@ -1,0 +1,28 @@
+// expect: shape: an id has no hyphens, not in 8-4-4-4-12 form
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "rows": [
+    {
+      "exercise": {
+        // invalid: 32 hex digits with no hyphens
+        "id": "1b1ef504afac4c7fa9bb7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "sets": 1,
+      "targetType": "reps"
+    }
+  ]
+}

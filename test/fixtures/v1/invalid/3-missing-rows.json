@@ -1,0 +1,15 @@
+// expect: shape: a Required field (`rows`) is missing
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  }
+  // invalid: no `rows`; it's Required, even when empty
+}

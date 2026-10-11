@@ -1,0 +1,58 @@
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "name": "Example AMRAP",
+  "tags": ["example"],
+  "base": "timed",
+  "format": {
+    "name": "AMRAP",
+    "timing": {
+      "kind": "timed",
+      "timeCap": { "kind": "open", "default": 720 },
+      "rounds": { "kind": "hidden" }
+    }
+  },
+  "timeCap": 720,
+  "rows": [
+    {
+      "exercise": {
+        "id": "b10149cb-44ea-4b88-89a2-bb82954476ec",
+        "name": "Pull-up",
+        "category": "strength",
+        "tags": ["back", "biceps"],
+        "targets": ["reps"],
+        "loads": ["bodyweight", "weight", "band"],
+        "builtIn": true
+      },
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 5 }
+    },
+    {
+      "exercise": {
+        "id": "c64b01f2-959b-ac16-eb6e-b851494db416",
+        "name": "Push-up",
+        "category": "strength",
+        "tags": ["chest", "triceps", "core"],
+        "targets": ["reps"],
+        "loads": ["bodyweight", "weight"],
+        "builtIn": true
+      },
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 10 }
+    },
+    {
+      "exercise": {
+        "id": "45058c12-ab0b-c50a-20e7-0821c369ca69",
+        "name": "Air Squat",
+        "category": "strength",
+        "tags": ["quads", "glutes"],
+        "targets": ["reps"],
+        "loads": ["bodyweight", "weight"],
+        "builtIn": true
+      },
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 15 }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+// expect: shape: `sharedBy` appears below the top level
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "sequence",
+  "items": [
+    {
+      "kind": "block",
+      // invalid: `sharedBy` on a block inside a sequence
+      "sharedBy": "Sam",
+      "base": "progressive",
+      "format": {
+        "timing": {
+          "kind": "progressive",
+          "setRest": { "kind": "hidden" },
+          "timeCap": { "kind": "hidden" }
+        }
+      },
+      "rows": [
+        {
+          "exercise": {
+            "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+            "name": "Squat",
+            "category": "strength",
+            "targets": ["reps"],
+            "loads": ["bodyweight"]
+          },
+          "sets": 1,
+          "targetType": "reps"
+        }
+      ]
+    }
+  ]
+}

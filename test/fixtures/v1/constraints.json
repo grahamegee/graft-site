@@ -1,0 +1,298 @@
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "sequence",
+  "name": "Constraint Tour",
+  "tags": ["fixture"],
+  "items": [
+    {
+      "kind": "block",
+      "name": "Interval: open rounds, locked work, hidden rest",
+      "base": "interval",
+      "format": {
+        "name": "Every Minute",
+        "timing": {
+          "kind": "interval",
+          // Deliberately 1e1: readers accept any spelling of a whole value (a writer would write 10).
+          "rounds": { "kind": "open", "default": 1e1 },
+          "work": { "kind": "locked", "value": 60 },
+          "rest": { "kind": "hidden" }
+        }
+      },
+      "rounds": 12,
+      "work": 60,
+      "rows": [
+        {
+          "exercise": {
+            "id": "62abb992-4219-5f40-4026-09c7a989e2ee",
+            "name": "Burpee",
+            "category": "power",
+            "tags": ["full body"],
+            "targets": ["reps"],
+            "loads": ["bodyweight"],
+            "builtIn": true
+          },
+          "targetType": "reps",
+          "target": { "kind": "reps", "value": 10 }
+        }
+      ]
+    },
+    {
+      "kind": "block",
+      "name": "Interval: locked rounds, hidden work, open rest",
+      "base": "interval",
+      "format": {
+        "name": "Fixed Rounds",
+        "timing": {
+          "kind": "interval",
+          "rounds": { "kind": "locked", "value": 4 },
+          "work": { "kind": "hidden" },
+          "rest": { "kind": "open", "default": 60 }
+        }
+      },
+      "rounds": 4,
+      "rest": 90,
+      "rows": [
+        {
+          "exercise": {
+            "id": "e16c259d-4e81-42de-acbf-d803f5d9812f",
+            "name": "Wall Ball",
+            "category": "power",
+            "tags": ["legs", "shoulders"],
+            "targets": ["reps"],
+            "loads": ["weight"]
+          },
+          "targetType": "reps",
+          "target": { "kind": "reps", "value": 20 },
+          "load": { "kind": "weight", "value": 9, "unit": "kg" }
+        }
+      ]
+    },
+    {
+      "kind": "block",
+      "name": "Interval: hidden rounds, open work, locked rest",
+      "base": "interval",
+      "format": {
+        "name": "Open Flow",
+        "timing": {
+          "kind": "interval",
+          "rounds": { "kind": "hidden" },
+          "work": { "kind": "open", "default": 40 },
+          "rest": { "kind": "locked", "value": 20 }
+        }
+      },
+      "work": 45,
+      "rest": 20,
+      "rows": [
+        {
+          "exercise": {
+            "id": "ac74fba5-6663-4227-8553-48181dc4ee68",
+            "name": "World's Greatest Stretch",
+            "category": "mobility",
+            "tags": ["hips", "thoracic"],
+            "targets": ["time"],
+            "loads": ["bodyweight"]
+          },
+          "targetType": "time",
+          "target": { "kind": "time", "value": 30 }
+        }
+      ]
+    },
+    { "kind": "rest", "seconds": 120 },
+    {
+      "kind": "block",
+      "name": "Timed: open time cap, hidden rounds",
+      "base": "timed",
+      "format": {
+        "name": "AMRAP",
+        "timing": {
+          "kind": "timed",
+          "timeCap": { "kind": "open", "default": 720 },
+          "rounds": { "kind": "hidden" }
+        }
+      },
+      "timeCap": 600,
+      "rows": [
+        {
+          "exercise": {
+            "id": "45058c12-ab0b-c50a-20e7-0821c369ca69",
+            "name": "Air Squat",
+            "category": "strength",
+            "tags": ["quads", "glutes"],
+            "targets": ["reps"],
+            "loads": ["bodyweight", "weight"],
+            "builtIn": true
+          },
+          "targetType": "reps",
+          "target": { "kind": "reps", "value": 15 }
+        }
+      ]
+    },
+    {
+      "kind": "block",
+      "name": "Timed: locked time cap, open rounds",
+      "base": "timed",
+      "format": {
+        "name": "Capped Rounds",
+        "timing": {
+          "kind": "timed",
+          "timeCap": { "kind": "locked", "value": 1200 },
+          "rounds": { "kind": "open", "default": 3 }
+        }
+      },
+      "timeCap": 1200,
+      "rounds": 5,
+      "rows": [
+        {
+          "exercise": {
+            "id": "e16c259d-4e81-42de-acbf-d803f5d9812f",
+            "name": "Wall Ball",
+            "category": "power",
+            "tags": ["legs", "shoulders"],
+            "targets": ["reps"],
+            "loads": ["weight"]
+          },
+          "targetType": "reps",
+          "targetPerRound": [
+            { "kind": "reps", "value": 21 },
+            { "kind": "reps", "value": 15 },
+            { "kind": "reps", "value": 9 },
+            { "kind": "reps", "value": 15 },
+            { "kind": "reps", "value": 21 }
+          ],
+          "load": { "kind": "weight", "value": 20, "unit": "lb" }
+        }
+      ]
+    },
+    {
+      "kind": "block",
+      "name": "Timed: hidden time cap, locked rounds",
+      "base": "timed",
+      "format": {
+        "name": "Three Rounds",
+        "timing": {
+          "kind": "timed",
+          "timeCap": { "kind": "hidden" },
+          "rounds": { "kind": "locked", "value": 3 }
+        }
+      },
+      "rounds": 3,
+      "rows": [
+        {
+          "exercise": {
+            "id": "92935632-5a34-4734-861c-7bb506634dd6",
+            "name": "Farmer's Carry",
+            "category": "strength",
+            "tags": ["grip"],
+            "targets": ["time", "distance"],
+            "defaultTarget": "distance",
+            "loads": ["weight"]
+          },
+          "targetType": "distance",
+          "target": { "kind": "distance", "value": 50 },
+          "load": { "kind": "weight", "value": 32, "unit": "kg" }
+        }
+      ]
+    },
+    { "kind": "rest", "seconds": 90 },
+    {
+      "kind": "block",
+      "name": "Progressive: open set rest, hidden time cap",
+      "tags": ["heavy"],
+      "base": "progressive",
+      "format": {
+        "name": "Strength",
+        "timing": {
+          "kind": "progressive",
+          "setRest": { "kind": "open", "default": 120 },
+          "timeCap": { "kind": "hidden" }
+        }
+      },
+      "setRest": 180,
+      "rows": [
+        {
+          "exercise": {
+            "id": "bdb34b46-7612-5dce-f6a6-404914f86b0b",
+            "name": "Back Squat",
+            "category": "strength",
+            "tags": ["quads", "glutes", "hamstrings"],
+            "targets": ["reps"],
+            "loads": ["weight"],
+            "builtIn": true
+          },
+          "sets": 5,
+          "targetType": "reps",
+          "target": { "kind": "reps", "value": 3 },
+          "load": { "kind": "weight", "value": 140, "unit": "kg" }
+        }
+      ]
+    },
+    {
+      "kind": "block",
+      "name": "Progressive: locked set rest, open time cap",
+      "base": "progressive",
+      "format": {
+        "name": "Density",
+        "timing": {
+          "kind": "progressive",
+          "setRest": { "kind": "locked", "value": 90 },
+          "timeCap": { "kind": "open", "default": 1800 }
+        }
+      },
+      "setRest": 90,
+      "timeCap": 1500,
+      "rows": [
+        {
+          "exercise": {
+            "id": "c64b01f2-959b-ac16-eb6e-b851494db416",
+            "name": "Push-up",
+            "category": "strength",
+            "tags": ["chest", "triceps", "core"],
+            "targets": ["reps"],
+            "loads": ["bodyweight", "weight"],
+            "builtIn": true
+          },
+          "sets": 3,
+          "targetType": "reps",
+          "targetPerRound": [
+            { "kind": "reps", "value": 20 },
+            { "kind": "reps", "value": 15 },
+            { "kind": "reps", "value": 10 }
+          ],
+          "load": { "kind": "bodyweight" }
+        }
+      ]
+    },
+    {
+      "kind": "block",
+      "name": "Progressive: hidden set rest, locked time cap",
+      "base": "progressive",
+      "format": {
+        "name": "Fifteen Minute Cap",
+        "timing": {
+          "kind": "progressive",
+          "setRest": { "kind": "hidden" },
+          "timeCap": { "kind": "locked", "value": 900 }
+        }
+      },
+      "timeCap": 900,
+      "rows": [
+        {
+          "exercise": {
+            "id": "92935632-5a34-4734-861c-7bb506634dd6",
+            "name": "Farmer's Carry",
+            "category": "strength",
+            "tags": ["grip"],
+            "targets": ["time", "distance"],
+            "defaultTarget": "distance",
+            "loads": ["weight"]
+          },
+          "sets": 4,
+          "targetType": "time",
+          "target": { "kind": "time", "value": 45 },
+          "load": { "kind": "weight", "value": 24, "unit": "kg" }
+        }
+      ]
+    }
+  ]
+}

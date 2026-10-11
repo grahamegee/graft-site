@@ -1,0 +1,32 @@
+// expect: inconsistent: a per-round target's kind differs from the `targetType`
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "sets": 2,
+      "targetType": "reps",
+      "targetPerRound": [
+        { "kind": "reps", "value": 5 },
+        // invalid: a time target in a reps row's per-round list
+        { "kind": "time", "value": 30 }
+      ]
+    }
+  ]
+}

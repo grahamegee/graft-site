@@ -1,0 +1,28 @@
+// expect: inconsistent: `loads` repeats a load type
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        // invalid: "bodyweight" twice
+        "loads": ["bodyweight", "bodyweight"]
+      },
+      "sets": 1,
+      "targetType": "reps"
+    }
+  ]
+}

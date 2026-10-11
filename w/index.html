@@ -4,42 +4,223 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>A Graft workout</title>
+<meta name="description" content="Open it in Graft to add it to your library.">
 <meta property="og:title" content="A Graft workout">
 <meta property="og:description" content="Open it in Graft to add it to your library.">
 <meta property="og:image" content="https://gotgraft.com/assets/graft-icon.png">
 <meta property="og:type" content="website">
 <meta name="robots" content="noindex">
 <meta name="apple-itunes-app" content="app-id=6797431297">
+<meta name="theme-color" content="#06091A">
 <link rel="icon" href="/assets/graft-icon.png">
+<link rel="apple-touch-icon" href="/assets/graft-icon.png">
 <style>
-  body{font:16px/1.5 -apple-system,system-ui,sans-serif;margin:0;padding:32px 16px;
-       background:#06091A;color:#eaeefb}
-  main{max-width:560px;margin:0 auto}
-  code{word-break:break-all;color:#98a3c2}
-  .get{display:inline-block;margin-top:8px;padding:12px 22px;border-radius:12px;
-       background:#5B8FFF;color:#06091A;font-weight:700;text-decoration:none}
+  /* The landing page's tokens (the app's own palette), both themes. */
+  :root{
+    --bg:#EFF2FA; --card:#F8FAFD; --fg:#0B1020; --muted:#525d78; --faint:#7c86a0;
+    --rule:#dbe1ef; --accent:#2A5FE0;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#06091A; --card:#141B38; --fg:#eaeefb; --muted:#98a3c2; --faint:#6d789a;
+      --rule:#1e2745; --accent:#5B8FFF;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#06091A; --card:#141B38; --fg:#eaeefb; --muted:#98a3c2; --faint:#6d789a;
+    --rule:#1e2745; --accent:#5B8FFF;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;overflow-wrap:anywhere}
+  .wrap{max-width:560px;margin:0 auto;padding:0 16px 56px}
+  a{color:var(--accent)}
+
+  .nav{padding:22px 0 8px}
+  .nav a{display:inline-block}
+  .nav img{width:119px;height:auto;display:block}
+
+  .eyebrow{margin:24px 0 4px;font-size:15px;color:var(--faint)}
+  h1{font-size:30px;line-height:1.15;letter-spacing:-.022em;margin:24px 0 6px;text-wrap:balance}
+  .eyebrow + h1{margin-top:0}
+  .sub{margin:0;color:var(--muted)}
+  .lede{margin:14px 0 0;color:var(--muted)}
+
+  .outline{list-style:none;margin:24px 0 0;padding:0}
+  .card{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:6px 16px;
+    margin-bottom:12px}
+  .card h2{font-size:18px;line-height:1.3;letter-spacing:-.01em;margin:8px 0 0}
+  .card .timing{margin:2px 0 4px;font-size:15px;color:var(--muted)}
+  .rows,.parts{list-style:none;margin:0;padding:0}
+  .row{border-top:1px solid var(--rule);padding:9px 0}
+  .rows:first-child > .row:first-child{border-top:0}
+  .line{display:flex;flex-wrap:wrap;justify-content:space-between;column-gap:12px}
+  .name{font-weight:500}
+  .detail{color:var(--muted);text-align:right;margin-left:auto;text-wrap:balance}
+  .notes{margin:2px 0 0;font-size:14px;color:var(--faint);font-style:italic}
+  .parts{margin:6px 0 2px;padding-left:12px;border-left:2px solid var(--rule);font-size:15px}
+  .parts li{padding:2px 0}
+  .empty{margin:8px 0;font-size:15px;color:var(--faint)}
+  .rest{display:flex;align-items:center;gap:12px;margin:0 0 12px;font-size:14px;color:var(--faint)}
+  .rest::before,.rest::after{content:"";flex:1;border-top:1px solid var(--rule)}
+
+  .actions{margin-top:28px}
+  .cta{display:block;text-align:center;background:var(--accent);color:#fff;padding:14px 24px;
+    border-radius:11px;text-decoration:none;font-weight:600}
+  .cta:hover{filter:brightness(1.08)}
+  .cta:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+  .note{margin:10px 0 0;font-size:15px;color:var(--faint);text-align:center}
+  .open{margin:18px 0 0;font-size:15px;text-align:center;color:var(--muted)}
+  .open a{font-weight:600;text-decoration:none}
+  @media (min-width:480px){
+    .cta{display:inline-block}
+    .note,.open{text-align:left}
+  }
 </style>
 </head>
 <body>
-<main>
-  <h1>A Graft workout</h1>
-  <p>You're seeing this page because the link opened in the browser, not in Graft.</p>
-  <p id="report">No workout in this link.</p>
-  <p><a class="get" href="https://apps.apple.com/app/id6797431297">Get or update Graft</a></p>
-  <p>Then tap the link you were sent again to add the workout.</p>
-</main>
-<script>
-  // Spike placeholder: reports what reached the browser. The fragment
-  // (after #) is never sent to this server.
-  const hash = location.hash.slice(1);
-  if (hash) {
-    const parts = hash.split(".");
-    const payload = parts.slice(2).join(".");
-    const declared = parseInt(parts[1], 10);
-    document.getElementById("report").textContent =
-      (payload.length === declared ? "Intact" : "Truncated") +
-      ": payload " + payload.length + " of " + declared + " characters.";
+<div class="wrap">
+  <div class="nav"><a href="/"><img src="/assets/graft-wordmark.png" alt="Graft" width="237" height="72"></a></div>
+  <main id="app">
+    <h1>A Graft workout</h1>
+    <p class="lede">Open it in Graft to add it to your library.</p>
+    <div class="actions">
+      <a class="cta" href="https://apps.apple.com/app/id6797431297">Get or update Graft</a>
+      <p class="note">Then tap the link you were sent again to add the workout.</p>
+    </div>
+  </main>
+</div>
+<script type="module">
+  import { payloadFrom, decode, outline } from './share.js';
+
+  // Everything from the payload is user-typed, so it goes in as text only:
+  // el() sets textContent, never innerHTML.
+  const STORE = 'https://apps.apple.com/app/id6797431297';
+  const app = document.getElementById('app');
+
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
   }
+
+  function link(className, href, text) {
+    const node = el('a', className, text);
+    node.href = href;
+    return node;
+  }
+
+  function actions({ label = 'Get or update Graft', tapAgain = true, payload = null } = {}) {
+    const box = el('div', 'actions');
+    box.append(link('cta', STORE, label));
+    if (tapAgain) box.append(el('p', 'note', 'Then tap the link you were sent again to add the workout.'));
+    if (payload) {
+      const open = el('p', 'open', 'Already have Graft? ');
+      open.append(link(null, `graft://import#${payload}`, 'Open it in Graft'));
+      box.append(open);
+    }
+    return box;
+  }
+
+  function message(title, lede, ...rest) {
+    app.replaceChildren(el('h1', null, title), el('p', 'lede', lede), ...rest);
+  }
+
+  function rowNode(row) {
+    const item = el('li', 'row');
+    const line = el('div', 'line');
+    line.append(el('span', 'name', row.name));
+    if (row.detail) line.append(el('span', 'detail', row.detail));
+    item.append(line);
+    if (row.components) {
+      const parts = el('ul', 'parts');
+      for (const part of row.components) {
+        const li = el('li', 'line');
+        li.append(el('span', null, part.name));
+        if (part.detail) li.append(el('span', 'detail', part.detail));
+        parts.append(li);
+      }
+      item.append(parts);
+    }
+    if (row.notes) item.append(el('p', 'notes', row.notes));
+    return item;
+  }
+
+  // A session's blocks carry their own name and timing. A single block's are
+  // the page title and subtitle already.
+  function blockNode(block, showHeader) {
+    const card = el('li', 'card');
+    if (showHeader) card.append(el('h2', null, block.name), el('p', 'timing', block.summary));
+    if (block.rows.length) {
+      const rows = el('ul', 'rows');
+      rows.append(...block.rows.map(rowNode));
+      card.append(rows);
+    } else {
+      card.append(el('p', 'empty', 'No exercises yet.'));
+    }
+    return card;
+  }
+
+  function showWorkout(o, payload, isSession) {
+    const nodes = [];
+    if (o.sharedBy) nodes.push(el('p', 'eyebrow', `Shared by ${o.sharedBy}`));
+    nodes.push(el('h1', null, o.title), el('p', 'sub', o.subtitle));
+    const list = el('ol', 'outline');
+    for (const item of o.items) {
+      list.append(item.kind === 'rest' ? el('li', 'rest', item.text) : blockNode(item, isSession));
+    }
+    if (o.items.length === 0) list.append(el('li', 'empty', 'No blocks yet.'));
+    nodes.push(list, actions({ payload }));
+    app.replaceChildren(...nodes);
+    document.title = `${o.title} · Graft`;
+  }
+
+  function showDamaged() {
+    message('This link is damaged', 'Graft couldn’t read the workout. Ask the sender to share it again.',
+      actions({ label: 'Get Graft', tapAgain: false }));
+  }
+
+  function showNotWorkout() {
+    const lede = el('p', 'lede', 'There’s no workout in this link. ');
+    lede.append(link(null, '/', 'Find out about Graft'));
+    app.replaceChildren(el('h1', null, 'This isn’t a workout link'), lede);
+  }
+
+  let latest = 0;
+
+  async function show() {
+    const run = ++latest;
+    document.title = 'A Graft workout';
+    const payload = payloadFrom(location.hash);
+    if (!payload) return showNotWorkout();
+    const result = await decode(payload);
+    if (run !== latest) return; // the hash changed while this one decoded
+    if (result.ok) {
+      let o;
+      try {
+        o = outline(result.doc);
+      } catch {
+        return showDamaged();
+      }
+      return showWorkout(o, payload, result.doc.kind === 'sequence');
+    }
+    switch (result.reason) {
+      case 'unsupported':
+        return message('A Graft workout', 'Your browser can’t show a preview of this workout.', actions({ payload }));
+      case 'newer':
+        return message('Update Graft to open this workout',
+          'It was shared from a newer version of Graft.', actions());
+      case 'damaged':
+        return showDamaged();
+      default:
+        return showNotWorkout();
+    }
+  }
+
+  window.addEventListener('hashchange', show);
+  show();
 </script>
 </body>
 </html>

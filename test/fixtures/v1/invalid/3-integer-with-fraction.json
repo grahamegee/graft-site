@@ -1,0 +1,28 @@
+// expect: shape: an integer field (`sets`) holds a fraction
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      // invalid: 1.5 sets; `sets` is an integer (1.0 would be accepted, 1.5 isn't)
+      "sets": 1.5,
+      "targetType": "reps"
+    }
+  ]
+}

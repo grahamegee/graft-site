@@ -1,0 +1,29 @@
+// expect: shape: the block has a timing field from another base
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  // invalid: `rounds` on a progressive block (its fields are `setRest` and `timeCap`)
+  "rounds": 3,
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "sets": 1,
+      "targetType": "reps"
+    }
+  ]
+}

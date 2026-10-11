@@ -1,0 +1,15 @@
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "interval",
+  "format": {
+    "timing": {
+      "kind": "interval",
+      "rounds": { "kind": "hidden" },
+      "work": { "kind": "hidden" },
+      "rest": { "kind": "hidden" }
+    }
+  },
+  "rows": []
+}

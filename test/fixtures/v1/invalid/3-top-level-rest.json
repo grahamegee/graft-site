@@ -1,0 +1,8 @@
+// expect: shape: the top level is a rest
+{
+  "graft": "workout",
+  "v": 1,
+  // invalid: a rest at the top level; a rest only appears inside a sequence
+  "kind": "rest",
+  "seconds": 60
+}

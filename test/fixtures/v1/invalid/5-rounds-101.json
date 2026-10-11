@@ -1,0 +1,28 @@
+// expect: outOfRange: `rounds` is above the maximum of 100
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "timed",
+  "format": {
+    "timing": {
+      "kind": "timed",
+      "timeCap": { "kind": "hidden" },
+      "rounds": { "kind": "open", "default": 10 }
+    }
+  },
+  // invalid: 101 rounds, one over the maximum
+  "rounds": 101,
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "targetType": "reps"
+    }
+  ]
+}

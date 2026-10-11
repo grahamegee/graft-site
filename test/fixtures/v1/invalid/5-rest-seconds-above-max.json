@@ -1,0 +1,10 @@
+// expect: outOfRange: a rest is above the maximum of 3,600 s
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "sequence",
+  "items": [
+    // invalid: a 3,601 s rest
+    { "kind": "rest", "seconds": 3601 }
+  ]
+}

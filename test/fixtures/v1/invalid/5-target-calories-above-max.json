@@ -1,0 +1,29 @@
+// expect: outOfRange: a calories target is above the maximum of 9,999
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["calories"],
+        "loads": ["bodyweight"]
+      },
+      "sets": 1,
+      "targetType": "calories",
+      // invalid: 10,000 calories, one over the maximum
+      "target": { "kind": "calories", "value": 10000 }
+    }
+  ]
+}

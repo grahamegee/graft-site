@@ -1,0 +1,150 @@
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "name": "Target Ladder",
+  "tags": ["conditioning", "fixture"],
+  "base": "interval",
+  "format": {
+    "name": "Intervals",
+    "timing": {
+      "kind": "interval",
+      "rounds": { "kind": "open", "default": 8 },
+      "work": { "kind": "open", "default": 30 },
+      "rest": { "kind": "open", "default": 30 }
+    },
+    "targetDefaults": { "reps": 10, "time": 30, "distance": 250, "calories": 12 }
+  },
+  "rounds": 3,
+  "work": 40,
+  "rest": 20,
+  "rows": [
+    {
+      "exercise": {
+        "id": "c64b01f2-959b-ac16-eb6e-b851494db416",
+        "name": "Push-up",
+        "category": "strength",
+        "tags": ["chest", "triceps", "core"],
+        "targets": ["reps"],
+        "loads": ["bodyweight", "weight"],
+        "builtIn": true
+      },
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 12 },
+      "load": { "kind": "bodyweight" }
+    },
+    {
+      "exercise": {
+        "id": "c64b01f2-959b-ac16-eb6e-b851494db416",
+        "name": "Push-up",
+        "category": "strength",
+        "tags": ["chest", "triceps", "core"],
+        "targets": ["reps"],
+        "loads": ["bodyweight", "weight"],
+        "builtIn": true
+      },
+      "targetType": "reps",
+      "targetPerRound": [
+        { "kind": "reps", "value": 12 },
+        { "kind": "reps", "value": 10 },
+        { "kind": "reps", "value": 8 }
+      ]
+    },
+    {
+      "exercise": {
+        "id": "064f2cb2-7338-4523-82bc-69efe598287d",
+        "name": "Plank",
+        "category": "core",
+        "tags": ["abs", "isometric"],
+        "targets": ["time"],
+        "loads": ["bodyweight"]
+      },
+      "targetType": "time",
+      "target": { "kind": "time", "value": 30.5 }
+    },
+    {
+      "exercise": {
+        "id": "064f2cb2-7338-4523-82bc-69efe598287d",
+        "name": "Plank",
+        "category": "core",
+        "tags": ["abs", "isometric"],
+        "targets": ["time"],
+        "loads": ["bodyweight"]
+      },
+      "targetType": "time",
+      "targetPerRound": [
+        { "kind": "time", "value": 20 },
+        { "kind": "time", "value": 30 },
+        { "kind": "time", "value": 45 }
+      ]
+    },
+    {
+      "exercise": {
+        "id": "5f34b3fa-a2d5-40c2-8ffd-98c17fe7f485",
+        "name": "Rowing Machine",
+        "category": "cardio",
+        "targets": ["time", "distance", "calories"],
+        "defaultTarget": "distance",
+        "loads": ["bodyweight"]
+      },
+      "targetType": "distance",
+      "target": { "kind": "distance", "value": 250 },
+      "notes": "Damper on 5"
+    },
+    {
+      "exercise": {
+        "id": "5f34b3fa-a2d5-40c2-8ffd-98c17fe7f485",
+        "name": "Rowing Machine",
+        "category": "cardio",
+        "targets": ["time", "distance", "calories"],
+        "defaultTarget": "distance",
+        "loads": ["bodyweight"]
+      },
+      "targetType": "distance",
+      "targetPerRound": [
+        { "kind": "distance", "value": 200 },
+        { "kind": "distance", "value": 300 },
+        { "kind": "distance", "value": 400.5 }
+      ]
+    },
+    {
+      "exercise": {
+        "id": "5f34b3fa-a2d5-40c2-8ffd-98c17fe7f485",
+        "name": "Rowing Machine",
+        "category": "cardio",
+        "targets": ["time", "distance", "calories"],
+        "defaultTarget": "distance",
+        "loads": ["bodyweight"]
+      },
+      "targetType": "calories",
+      "target": { "kind": "calories", "value": 15 }
+    },
+    {
+      "exercise": {
+        "id": "5f34b3fa-a2d5-40c2-8ffd-98c17fe7f485",
+        "name": "Rowing Machine",
+        "category": "cardio",
+        "targets": ["time", "distance", "calories"],
+        "defaultTarget": "distance",
+        "loads": ["bodyweight"]
+      },
+      "targetType": "calories",
+      "targetPerRound": [
+        { "kind": "calories", "value": 10 },
+        { "kind": "calories", "value": 12 },
+        { "kind": "calories", "value": 14 }
+      ]
+    },
+    {
+      "exercise": {
+        "id": "5f34b3fa-a2d5-40c2-8ffd-98c17fe7f485",
+        "name": "Rowing Machine",
+        "category": "cardio",
+        "targets": ["time", "distance", "calories"],
+        "defaultTarget": "distance",
+        "loads": ["bodyweight"]
+      },
+      "targetType": "time"
+    }
+  ]
+}

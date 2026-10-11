@@ -1,0 +1,7 @@
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "sequence",
+  "name": "Empty Session",
+  "items": []
+}

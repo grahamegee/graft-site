@@ -1,0 +1,28 @@
+// expect: outOfRange: `rounds` is below the minimum of 1
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "timed",
+  "format": {
+    "timing": {
+      "kind": "timed",
+      "timeCap": { "kind": "hidden" },
+      "rounds": { "kind": "open", "default": 10 }
+    }
+  },
+  // invalid: 0 rounds
+  "rounds": 0,
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "targetType": "reps"
+    }
+  ]
+}

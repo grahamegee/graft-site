@@ -1,0 +1,29 @@
+// expect: outOfRange: a `work` constraint is below the minimum of 1 s
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "interval",
+  "format": {
+    "timing": {
+      "kind": "interval",
+      "rounds": { "kind": "hidden" },
+      // invalid: work locked at 0 s (the block's `work` agrees, so only the range fails)
+      "work": { "kind": "locked", "value": 0 },
+      "rest": { "kind": "hidden" }
+    }
+  },
+  "work": 0,
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "targetType": "reps"
+    }
+  ]
+}

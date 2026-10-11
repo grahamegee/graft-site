@@ -1,0 +1,30 @@
+// expect: newerVersion: `v` is newer than this reader knows, so nothing after it is read
+{
+  "graft": "workout",
+  // invalid: version 2; a V1 reader stops here, before it reads anything else
+  "v": 2,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "sets": 1,
+      "targetType": "reps",
+      // Never reached: a V2 field V1 doesn't know. Without the version check it would be a shape error.
+      "rpe": 8
+    }
+  ]
+}

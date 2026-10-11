@@ -1,0 +1,24 @@
+// expect: inconsistent: a per-round list is on a block with no `rounds`
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "timed",
+  "format": {
+    "timing": { "kind": "timed", "timeCap": { "kind": "hidden" }, "rounds": { "kind": "hidden" } }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "targetType": "reps",
+      // invalid: a per-round list, but this timed block has no `rounds` (hidden)
+      "targetPerRound": [{ "kind": "reps", "value": 5 }, { "kind": "reps", "value": 4 }]
+    }
+  ]
+}

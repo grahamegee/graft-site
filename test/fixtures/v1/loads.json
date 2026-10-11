@@ -1,0 +1,177 @@
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "name": "Load Sampler",
+  "tags": ["fixture"],
+  "base": "progressive",
+  "format": {
+    "name": "Strength",
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "open", "default": 120 },
+      "timeCap": { "kind": "hidden" }
+    },
+    "loadDefaults": {
+      "weight": { "kind": "weight", "value": 135, "unit": "lb" },
+      "band": { "kind": "band", "band": "heavy" }
+    }
+  },
+  "setRest": 150,
+  "rows": [
+    {
+      "exercise": {
+        "id": "b10149cb-44ea-4b88-89a2-bb82954476ec",
+        "name": "Pull-up",
+        "category": "strength",
+        "tags": ["back", "biceps"],
+        "targets": ["reps"],
+        "loads": ["bodyweight", "weight", "band"],
+        "builtIn": true
+      },
+      "sets": 3,
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 8 },
+      "load": { "kind": "bodyweight" }
+    },
+    {
+      "exercise": {
+        "id": "bdb34b46-7612-5dce-f6a6-404914f86b0b",
+        "name": "Back Squat",
+        "category": "strength",
+        "tags": ["quads", "glutes", "hamstrings"],
+        "targets": ["reps"],
+        "loads": ["weight"],
+        "builtIn": true
+      },
+      "sets": 5,
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 5 },
+      "load": { "kind": "weight", "value": 102.5, "unit": "kg" }
+    },
+    {
+      "exercise": {
+        "id": "0b7269b3-3397-4f6d-a441-5c58737b8616",
+        "name": "Trap Bar Deadlift",
+        "category": "strength",
+        "tags": ["posterior chain"],
+        "targets": ["reps"],
+        "loads": ["weight"]
+      },
+      "sets": 3,
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 5 },
+      "load": { "kind": "weight", "value": 315, "unit": "lb" }
+    },
+    {
+      "exercise": {
+        "id": "b10149cb-44ea-4b88-89a2-bb82954476ec",
+        "name": "Pull-up",
+        "category": "strength",
+        "tags": ["back", "biceps"],
+        "targets": ["reps"],
+        "loads": ["bodyweight", "weight", "band"],
+        "builtIn": true
+      },
+      "sets": 3,
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 6 },
+      "load": { "kind": "band", "band": "light" }
+    },
+    {
+      "exercise": {
+        "id": "92d4623d-14ef-400b-80da-84ceceb5b58b",
+        "name": "Ring Dip",
+        "category": "strength",
+        "tags": ["chest", "triceps"],
+        "targets": ["reps"],
+        "loads": ["bodyweight", "weight", "band"],
+        "defaultLoad": "weight"
+      },
+      // Deliberately 4.0: readers accept any spelling of a whole value (a writer would write 4).
+      "sets": 4.0,
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 6 },
+      "loadPerRound": [
+        { "kind": "band", "band": "extraHeavy" },
+        { "kind": "band", "band": "heavy" },
+        { "kind": "band", "band": "medium" },
+        { "kind": "band", "band": "light" }
+      ]
+    },
+    {
+      "exercise": {
+        "id": "bdb34b46-7612-5dce-f6a6-404914f86b0b",
+        "name": "Back Squat",
+        "category": "strength",
+        "tags": ["quads", "glutes", "hamstrings"],
+        "targets": ["reps"],
+        "loads": ["weight"],
+        "builtIn": true
+      },
+      "sets": 3,
+      "targetType": "reps",
+      "targetPerRound": [
+        { "kind": "reps", "value": 5 },
+        { "kind": "reps", "value": 3 },
+        { "kind": "reps", "value": 1 }
+      ],
+      "loadPerRound": [
+        // Deliberately 100.0: readers accept any spelling of a number (a writer would write 100).
+        { "kind": "weight", "value": 100.0, "unit": "kg" },
+        { "kind": "weight", "value": 110, "unit": "kg" },
+        { "kind": "weight", "value": 120.5, "unit": "kg" }
+      ]
+    },
+    {
+      "exercise": {
+        "id": "0b7269b3-3397-4f6d-a441-5c58737b8616",
+        "name": "Trap Bar Deadlift",
+        "category": "strength",
+        "tags": ["posterior chain"],
+        "targets": ["reps"],
+        "loads": ["weight"]
+      },
+      "sets": 2,
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 5 },
+      "loadPerRound": [
+        { "kind": "weight", "value": 225, "unit": "lb" },
+        { "kind": "weight", "value": 272.5, "unit": "lb" }
+      ]
+    },
+    {
+      "exercise": {
+        "id": "92d4623d-14ef-400b-80da-84ceceb5b58b",
+        "name": "Ring Dip",
+        "category": "strength",
+        "tags": ["chest", "triceps"],
+        "targets": ["reps"],
+        "loads": ["bodyweight", "weight", "band"],
+        "defaultLoad": "weight"
+      },
+      "sets": 3,
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 8 },
+      "loadPerRound": [
+        { "kind": "bodyweight" },
+        { "kind": "weight", "value": 10, "unit": "kg" },
+        { "kind": "weight", "value": 20, "unit": "kg" }
+      ]
+    },
+    {
+      "exercise": {
+        "id": "1ec6bff8-72e8-440c-9c55-83f43f06db47",
+        "name": "Banded Pull-apart",
+        "category": "mobility",
+        "tags": ["shoulders"],
+        "targets": ["reps", "time"],
+        "loads": ["band"]
+      },
+      "sets": 2,
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 15 },
+      "load": { "kind": "band", "band": "medium" }
+    }
+  ]
+}

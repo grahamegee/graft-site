@@ -1,0 +1,24 @@
+// expect: shape: a non-progressive row has `sets`
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "timed",
+  "format": {
+    "timing": { "kind": "timed", "timeCap": { "kind": "hidden" }, "rounds": { "kind": "hidden" } }
+  },
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      // invalid: `sets` on a row of a timed block
+      "sets": 3,
+      "targetType": "reps"
+    }
+  ]
+}

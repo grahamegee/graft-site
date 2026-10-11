@@ -1,0 +1,125 @@
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "name": "Complex Day",
+  "base": "progressive",
+  "format": {
+    "name": "Strength",
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "open", "default": 120 },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "setRest": 180,
+  "rows": [
+    {
+      "exercise": {
+        "id": "be2f6d45-846c-427f-836a-007a7000a8be",
+        "name": "Barbell Complex",
+        "category": "power",
+        "tags": ["barbell"],
+        "components": [
+          {
+            "id": "1606d301-4d55-4905-b181-f6d643c5f267",
+            "name": "Power Clean",
+            "category": "power",
+            "tags": ["olympic"],
+            "targets": ["reps"],
+            "loads": ["weight"]
+          },
+          {
+            "id": "22383a13-22c3-4f9c-96df-f6819f3fb01f",
+            "name": "Front Squat",
+            "category": "strength",
+            "tags": ["quads"],
+            "targets": ["reps"],
+            "loads": ["weight"]
+          },
+          {
+            "id": "ed531643-2931-4d53-8d8d-1f5dcd4b1c64",
+            "name": "Push Press",
+            "category": "power",
+            "tags": ["shoulders"],
+            "targets": ["reps"],
+            "loads": ["weight"]
+          },
+          {
+            "id": "bdb34b46-7612-5dce-f6a6-404914f86b0b",
+            "name": "Back Squat",
+            "category": "strength",
+            "tags": ["quads", "glutes", "hamstrings"],
+            "targets": ["reps"],
+            "loads": ["weight"],
+            "builtIn": true
+          },
+          {
+            "id": "ed531643-2931-4d53-8d8d-1f5dcd4b1c64",
+            "name": "Push Press",
+            "category": "power",
+            "tags": ["shoulders"],
+            "targets": ["reps"],
+            "loads": ["weight"]
+          }
+        ]
+      },
+      "sets": 3,
+      // Deliberately outside the components' shared targets (all reps-only): a group row's own
+      // targetType isn't checked. The slots carry the prescription.
+      "targetType": "time",
+      "notes": "Don't put the bar down",
+      "slots": [
+        {
+          "targetType": "reps",
+          "targetPerRound": [
+            { "kind": "reps", "value": 3 },
+            { "kind": "reps", "value": 2 },
+            { "kind": "reps", "value": 1 }
+          ],
+          "loadPerRound": [
+            { "kind": "weight", "value": 60, "unit": "kg" },
+            { "kind": "weight", "value": 70, "unit": "kg" },
+            { "kind": "weight", "value": 80, "unit": "kg" }
+          ]
+        },
+        {
+          "targetType": "reps",
+          "target": { "kind": "reps", "value": 3 },
+          "load": { "kind": "weight", "value": 70, "unit": "kg" }
+        },
+        {
+          "targetType": "reps",
+          "target": { "kind": "reps", "value": 5 }
+        },
+        {
+          "targetType": "reps",
+          "target": { "kind": "reps", "value": 3 },
+          "loadPerRound": [
+            { "kind": "weight", "value": 135, "unit": "lb" },
+            { "kind": "weight", "value": 155, "unit": "lb" },
+            { "kind": "weight", "value": 175.5, "unit": "lb" }
+          ]
+        },
+        {
+          "targetType": "reps"
+        }
+      ]
+    },
+    {
+      "exercise": {
+        "id": "b10149cb-44ea-4b88-89a2-bb82954476ec",
+        "name": "Pull-up",
+        "category": "strength",
+        "tags": ["back", "biceps"],
+        "targets": ["reps"],
+        "loads": ["bodyweight", "weight", "band"],
+        "builtIn": true
+      },
+      "sets": 3,
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 8 },
+      "load": { "kind": "bodyweight" }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "name": "Example Strength",
+  "tags": ["example"],
+  "base": "progressive",
+  "format": {
+    "name": "Strength",
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "open", "default": 120 },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  "setRest": 120,
+  "rows": [
+    {
+      "exercise": {
+        "id": "bdb34b46-7612-5dce-f6a6-404914f86b0b",
+        "name": "Back Squat",
+        "category": "strength",
+        "tags": ["quads", "glutes", "hamstrings"],
+        "targets": ["reps"],
+        "loads": ["weight"],
+        "builtIn": true
+      },
+      "sets": 5,
+      "targetType": "reps",
+      "target": { "kind": "reps", "value": 5 },
+      "load": { "kind": "weight", "value": 80, "unit": "kg" }
+    }
+  ]
+}

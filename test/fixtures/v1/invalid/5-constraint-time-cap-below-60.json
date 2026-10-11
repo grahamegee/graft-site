@@ -1,0 +1,29 @@
+// expect: outOfRange: a `timeCap` constraint is below the minimum of 60 s
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "hidden" },
+      // invalid: a default cap of 30 s
+      "timeCap": { "kind": "open", "default": 30 }
+    }
+  },
+  "timeCap": 600,
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "sets": 1,
+      "targetType": "reps"
+    }
+  ]
+}

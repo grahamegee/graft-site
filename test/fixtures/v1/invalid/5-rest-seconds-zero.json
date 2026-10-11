@@ -1,0 +1,10 @@
+// expect: outOfRange: a rest is below the minimum of 1 s
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "sequence",
+  "items": [
+    // invalid: a 0 s rest
+    { "kind": "rest", "seconds": 0 }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "name": "Superset Rounds",
+  "base": "timed",
+  "format": {
+    "name": "For Time",
+    "timing": {
+      "kind": "timed",
+      "timeCap": { "kind": "open", "default": 1200 },
+      "rounds": { "kind": "open", "default": 3 }
+    },
+    "targetDefaults": { "reps": 10, "distance": 400, "calories": 10 },
+    "loadDefaults": {
+      "weight": { "kind": "weight", "value": 20, "unit": "kg" },
+      "band": { "kind": "band", "band": "medium" }
+    }
+  },
+  "timeCap": 1080,
+  "rounds": 3,
+  "rows": [
+    {
+      "exercise": {
+        "id": "80c0d109-1069-4d6d-be68-7e14d91188e2",
+        "name": "Push-up / Air Squat",
+        "category": "strength",
+        "tags": ["chest", "core", "glutes", "quads", "triceps"],
+        "components": [
+          {
+            "id": "c64b01f2-959b-ac16-eb6e-b851494db416",
+            "name": "Push-up",
+            "category": "strength",
+            "tags": ["chest", "triceps", "core"],
+            "targets": ["reps"],
+            "loads": ["bodyweight", "weight"],
+            "builtIn": true
+          },
+          {
+            "id": "45058c12-ab0b-c50a-20e7-0821c369ca69",
+            "name": "Air Squat",
+            "category": "strength",
+            "tags": ["quads", "glutes"],
+            "targets": ["reps"],
+            "loads": ["bodyweight", "weight"],
+            "builtIn": true
+          }
+        ]
+      },
+      "superset": true,
+      "targetType": "reps",
+      "notes": "Unbroken if you can",
+      "slots": [
+        {
+          "targetType": "reps",
+          "targetPerRound": [
+            { "kind": "reps", "value": 15 },
+            { "kind": "reps", "value": 12 },
+            { "kind": "reps", "value": 9 }
+          ],
+          "load": { "kind": "bodyweight" }
+        },
+        {
+          "targetType": "reps",
+          "target": { "kind": "reps", "value": 20 },
+          "loadPerRound": [
+            { "kind": "bodyweight" },
+            { "kind": "weight", "value": 10, "unit": "kg" },
+            { "kind": "weight", "value": 20, "unit": "kg" }
+          ]
+        }
+      ]
+    },
+    {
+      "exercise": {
+        "id": "5f34b3fa-a2d5-40c2-8ffd-98c17fe7f485",
+        "name": "Rowing Machine",
+        "category": "cardio",
+        "targets": ["time", "distance", "calories"],
+        "defaultTarget": "distance",
+        "loads": ["bodyweight"]
+      },
+      "targetType": "calories",
+      "target": { "kind": "calories", "value": 12 }
+    }
+  ]
+}

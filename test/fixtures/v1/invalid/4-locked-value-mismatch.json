@@ -1,0 +1,29 @@
+// expect: inconsistent: the timing field differs from its locked value
+{
+  "graft": "workout",
+  "v": 1,
+  "kind": "block",
+  "base": "progressive",
+  "format": {
+    "timing": {
+      "kind": "progressive",
+      "setRest": { "kind": "locked", "value": 60 },
+      "timeCap": { "kind": "hidden" }
+    }
+  },
+  // invalid: 90, but the format locks `setRest` at 60
+  "setRest": 90,
+  "rows": [
+    {
+      "exercise": {
+        "id": "1b1ef504-afac-4c7f-a9bb-7b1bed364036",
+        "name": "Squat",
+        "category": "strength",
+        "targets": ["reps"],
+        "loads": ["bodyweight"]
+      },
+      "sets": 1,
+      "targetType": "reps"
+    }
+  ]
+}
