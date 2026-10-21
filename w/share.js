@@ -168,7 +168,7 @@ export function checkHeader(doc) {
 /** Thrown by outline() for a doc it can't lay out. The page shows it as damaged. */
 export class UnusableError extends Error {}
 
-const BASE_NAMES = { interval: 'Interval', timed: 'Timed', progressive: 'Progression' };
+const BASE_NAMES = { interval: 'Interval', timed: 'Timed', progressive: 'Sets' };
 const TARGET_NAMES = { reps: 'Reps', time: 'Time', distance: 'Distance', calories: 'Calories' };
 const BAND_NAMES = { light: 'Light', medium: 'Medium', heavy: 'Heavy', extraHeavy: 'Extra Heavy' };
 

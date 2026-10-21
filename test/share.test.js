@@ -183,7 +183,7 @@ describe('outlines', () => {
     assert.deepEqual(empty.items[0].rows, []);
 
     const minimal = await outlineOf('minimal-block.json');
-    assert.equal(minimal.title, 'Progression');
+    assert.equal(minimal.title, 'Sets');
     assert.equal(minimal.subtitle, 'Sets');
     assert.deepEqual(minimal.items[0].rows, [{ name: 'Squat', detail: 'Reps', notes: null }]);
 
