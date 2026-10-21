@@ -1,0 +1,7 @@
+# Graft
+
+> Graft is an iPhone workout timer and log for EMOM, AMRAP, Tabata, for-time and strength workouts, with live heart rate.
+
+## Writing workouts for Graft
+
+- [Graft workout format (import-v1)](https://gotgraft.com/llm/import-v1.md): how to write a workout that a Graft user can paste into the app. Read it in full before writing one.
