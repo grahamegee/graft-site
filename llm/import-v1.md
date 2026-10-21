@@ -102,12 +102,14 @@ Graft has no notes or comments. Leave out coaching cues, tempo, "% of
   - `calories`: a whole number.
 
   No target means "as many as possible" or "until the window ends".
-- **Load**, optional (none means bodyweight):
+- **Load**, optional:
   - `weight` with `unit` (`"kg"` or `"lb"`);
   - or `band`: `"light"`, `"medium"`, `"heavy"` or `"extraHeavy"`.
 
   When two weights are given (like 95/65 for men and women), use the
-  first.
+  first. **When the workout gives no load, leave it out. Don't guess:**
+  Graft fills in its own default, the same one it uses when someone adds
+  that exercise by hand. Bodyweight exercises need no load.
 - **Different values each round or set:** give a list instead of a
   number, one value per round (interval and timed blocks; its length must
   equal `rounds`) or per set (progressive; its length must equal `sets`).
