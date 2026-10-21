@@ -37,8 +37,10 @@ workout the user asks for in this chat.
     **setRest** between sets.
 - A **row** is one exercise with its **target** (how much) and **load**
   (how heavy).
-- A **superset** is a row made of several exercises done back to back as
-  one item. In an interval block it shares one work window.
+- A **superset** is a row made of a small group of exercises, usually two
+  or three, done back to back as one item. In an interval block it shares
+  one work window. A circuit (a list of exercises done several times) is
+  not a superset: it's a `timed` block with `rounds`.
 - An **exercise** has a name, a category, the target kinds it supports and
   the load kinds it supports.
 
@@ -168,6 +170,7 @@ the targets and loads it supports; a row may only use those.
               "targets": ["reps"], "loads": ["weight"] }
 ```
 
+- `name`: singular, like the built-ins ("Lu Raise", not "Lu Raises").
 - `category`: `strength`, `power`, `cardio`, `core` or `mobility`.
 - `targets`: any of `reps`, `time`, `distance`, `calories`.
 - `loads`: any of `bodyweight`, `weight`, `band`.
