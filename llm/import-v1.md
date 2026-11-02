@@ -8,7 +8,7 @@ workout the user asks for in this chat.
 
 - Answer with **exactly one JSON code block** holding the workout, in the
   format below. A sentence or two before it is fine; nothing after it.
-- The JSON starts with `"graft": "import-v1"`.
+- The JSON starts with `"importVersion": 1`.
 - Two kinds of request:
   - **Converting** a workout the user gives you (text, a photo, a link):
     copy every value exactly as written. Never add a value that isn't
@@ -18,58 +18,63 @@ workout the user asks for in this chat.
 
 ## How Graft thinks about a workout
 
-- A **workout** is one **block**, or several blocks in order, with optional
-  **rest** between them. A whole session (warm-up, strength, conditioning,
-  cool-down) is one workout with a block for each part.
-- A **block** is one **format** and a list of **rows**, in order.
-- A **format** says how a block runs. Every format has one of three
+- A **workout** is a list of **blocks**, in order. Each block is either a
+  **workout block** or a **rest block**. A whole session (warm-up,
+  strength, conditioning, cool-down) is one workout with a workout block
+  for each part, and rest blocks between them where the workout says.
+- A **workout block** is one **format** and a list of **exercises**, in
+  order.
+- A **format** says how a workout block runs. Every format has one of three
   **bases**:
-  - `interval`: the clock gives a fixed **work** window, optionally
-    followed by **rest**. **Each row gets its own work window, in order,
-    and `rounds` counts full passes through all the rows.** "EMOM 12,
-    odd minutes swings, even minutes rowing" is 2 rows and 6 rounds. To do
-    several exercises inside the same window, put them in one superset.
-  - `timed`: the rows are done in order against a running clock, with an
-    optional **timeCap**. With `rounds`, the list is done that many times
-    ("3 rounds for time"). Without rounds, it repeats until the cap
-    (AMRAP).
-  - `progressive`: strength work. Each row has a number of **sets**, with
-    **setRest** between sets.
-- A **row** is one exercise with its **target** (how much) and **load**
-  (how heavy).
-- A **superset** is a row made of a small group of exercises, usually two
-  or three, done back to back as one item. In an interval block it shares
-  one work window. A circuit (a list of exercises done several times) is
+  - `interval`: The clock sets the pace: a work window for each exercise, every round.
+    Each window is a fixed **work** time, optionally followed by **rest**.
+    **Each exercise gets its own work window, in order, and `rounds` counts
+    full passes through all the exercises.** "EMOM 12, odd minutes swings,
+    even minutes rowing" is 2 exercises and 6 rounds. To do several
+    exercises inside the same window, put them in one superset.
+  - `timed`: One running clock for the whole block; work through the list at your own pace.
+    The exercises are done in order, with an optional **timeCap**. With
+    `rounds`, the list is done that many times ("3 rounds for time").
+    Without rounds, it repeats until the cap (AMRAP). Give `timeCap`,
+    `rounds` or both.
+  - `sets`: Sets of each exercise, with rest between sets.
+    Each exercise has a number of **sets**, with **setRest** between sets
+    (strength work).
+- Each exercise in a block has a **target** (how much) and a **load** (how
+  heavy).
+- A **superset** is a small group of exercises, usually two or three,
+  done back to back as one item: one entry in a block's exercises. In an
+  interval block it shares one work window. A circuit (a list of exercises done several times) is
   not a superset: it's a `timed` block with `rounds`.
-- An **exercise** has a name, a category, the target kinds it supports and
-  the load kinds it supports.
+- Graft's **exercise library** gives each exercise a name, a category, and
+  the target and load kinds it supports.
 
 Graft has no notes or comments. Leave out coaching cues, tempo, "% of
 1RM", "Rx" and the like.
 
 ## The format
 
-```json
+```
 {
-  "graft": "import-v1",
+  "importVersion": 1,
   "name": "Workout name",
-  "items": [ Block or Rest, ... ]
+  "blocks": [ Workout block or Rest block, ... ]
 }
 ```
 
 - `name` is optional.
-- `items` holds at least one block.
+- `blocks` holds at least one workout block.
 
-**Rest** between blocks: `{ "rest": 120 }` (seconds).
+**Rest block:** `{ "rest": 120 }` (seconds).
 
-**Block:**
+**Workout block:**
 
-```json
+```
 {
   "name": "Warm-up",
   "format": "EMOM",
   "rounds": 10,
-  "rows": [ Row or Superset, ... ]
+  "exercises": [ Exercise or Superset, ... ]
 }
 ```
 
@@ -78,16 +83,16 @@ Graft has no notes or comments. Leave out coaching cues, tempo, "% of
 - `format` is a built-in format's name, or a new format (see Formats).
 - The timing settings depend on the base:
 
-  | Base | Settings |
-  |---|---|
-  | `interval` | `rounds`, `work` (seconds), `rest` (seconds) |
-  | `timed` | `timeCap` (seconds), `rounds` |
-  | `progressive` | `setRest` (seconds), `timeCap` (seconds) |
+  | Base | Settings | Required |
+  |---|---|---|
+  | `interval` | `rounds`, `work` (seconds), `rest` (seconds) | `rounds` and `work` |
+  | `timed` | `timeCap` (seconds), `rounds` | `timeCap`, `rounds` or both |
+  | `sets` | `setRest` (seconds), `timeCap` (seconds) | none |
 
   Give exactly the settings the format needs (see Formats). Leave out the
   rest.
 
-**Row:**
+**Exercise:**
 
 ```json
 { "exercise": "Back Squat", "sets": 5, "reps": 5, "weight": 100, "unit": "kg" }
@@ -95,8 +100,8 @@ Graft has no notes or comments. Leave out coaching cues, tempo, "% of
 
 - `exercise`: a built-in exercise's name, or a new exercise (see
   Exercises).
-- `sets`: progressive blocks only, and always there. If the workout
-  doesn't say, use 1.
+- `sets`: sets blocks only, and always there. If the workout doesn't
+  say, use 1.
 - **Target**, at most one of:
   - `reps`: a whole number;
   - `time`: seconds;
@@ -114,22 +119,35 @@ Graft has no notes or comments. Leave out coaching cues, tempo, "% of
   that exercise by hand. Bodyweight exercises need no load.
 - **Different values each round or set:** give a list instead of a
   number, one value per round (interval and timed blocks; its length must
-  equal `rounds`) or per set (progressive; its length must equal `sets`).
+  equal `rounds`) or per set (sets blocks; its length must equal `sets`).
   21-15-9 reps over 3 rounds is `"reps": [21, 15, 9]`. Weight can be a
   list too: `"weight": [60, 70, 80]`.
 
 **Superset:**
 
-```json
-{ "superset": [ Row, Row ], "sets": 3 }
+```
+{ "superset": [ Exercise, Exercise ], "sets": 3 }
 ```
 
-- At least two rows, each with its own exercise, target and load, and no
+- At least two exercises, each with its own target and load, and no
   `sets` of their own.
-- `sets` only in progressive blocks, as for a row.
+- `sets` only in sets blocks, as for an exercise.
 
-**Limits:** reps and calories 1–9,999; time 1–3,600 s; distance up to
-1,000,000 m; weight up to 1,000 kg (2,204 lb); `rounds` 1–100; `sets`
+**Write each value one way, as this page does:**
+
+- Numbers are JSON numbers, never strings: `"reps": 15`, not
+  `"reps": "15"`.
+- Times (`time`, `work`, `rest`, `setRest`, `timeCap`, a rest block's
+  `rest`) are seconds: `90`, not `"1:30"` or `"90s"`.
+- `distance` is metres: `5000`, not `"5 km"`.
+- `weight` is a number with its unit in `unit`:
+  `"weight": 24, "unit": "kg"`, not `"weight": "24 kg"`.
+- Keys and values are spelt exactly as on this page, in the same case:
+  `timeCap`, not `time_cap`; `"extraHeavy"`, not `"extra heavy"`;
+  `"strength"`, not `"Strength"`.
+
+**Limits:** reps and calories 1–9,999; time 1–3,600 s; distance
+1–1,000,000 m; weight up to 1,000 kg (2,204.5 lb); `rounds` 1–100; `sets`
 1–20; `work`, `rest`, `setRest` and a rest item 1–3,600 s; `timeCap`
 60–86,400 s.
 
@@ -145,12 +163,12 @@ needs exactly the settings listed, and fixes the others:
 | `Intervals` | interval | `rounds`, `work`, `rest` | |
 | `AMRAP` | timed | `timeCap` | no rounds |
 | `For Time` | timed | `timeCap`, `rounds` | |
-| `Strength` | progressive | `setRest` | no time cap |
+| `Strength` | sets | `setRest` | no time cap |
 
 **When none fits, create a format.** Name it the way the workout names it,
 give its base, and give only the settings the workout states:
 
-```json
+```
 "format": { "name": "E2MOM", "base": "interval" }, "rounds": 6, "work": 120
 ```
 
@@ -161,49 +179,50 @@ strength work with no rest stated.
 ## Exercises
 
 Use a built-in exercise's name exactly when one fits. Each is listed with
-the targets and loads it supports; a row may only use those.
+the targets and loads it supports; an exercise in a block may only use
+those.
 
 **When none fits, create an exercise:**
 
-```json
+```
 "exercise": { "name": "Lu Raise", "category": "strength",
               "targets": ["reps"], "loads": ["weight"] }
 ```
 
 - `name`: singular, like the built-ins ("Lu Raise", not "Lu Raises").
-- `category`: `strength`, `power`, `cardio`, `core` or `mobility`.
-- `targets`: any of `reps`, `time`, `distance`, `calories`.
-- `loads`: any of `bodyweight`, `weight`, `band`.
+- `category`: `strength`, `power`, `core`, `cardio` or `mobility`.
+- `targets`: a list of any of `reps`, `time`, `distance`, `calories`.
+- `loads`: a list of any of `bodyweight`, `weight`, `band`.
 
 If the movement isn't in the list, create it. Don't substitute a
 different movement that happens to be built in.
 
 ### Built-in exercises
 
-### Strength
+#### Strength
 
-- **reps · weight:** Front Squat, Overhead Squat, Zercher Squat, Deadlift, Romanian Deadlift, Sumo Deadlift, Snatch-grip Deadlift, Rack Pull, Good Morning, Hip Thrust, Barbell Bench Press, Barbell Incline Bench Press, Close-grip Bench Press, Barbell Floor Press, Overhead Press, Landmine Press, Barbell Row, Pendlay Row, T-Bar Row, Shrug, Back Rack Walking Lunge, Front Rack Walking Lunge, Overhead Walking Lunge, Skull Crusher, Barbell Bicep Curl, Thruster, Lat Pulldown, Seated Cable Row, Leg Press, Leg Curl, Leg Extension, Goblet Squat, Dumbbell Front Squat, Dumbbell Romanian Deadlift, Single-leg Romanian Deadlift, Kettlebell Deadlift, Suitcase Deadlift, Kettlebell Clean, Dumbbell Clean, Kettlebell High Pull, Dumbbell Bench Press, Dumbbell Incline Press, Dumbbell Floor Press, Dumbbell Overhead Press, Single-arm Overhead Press, Arnold Press, Dumbbell Thruster, Dumbbell Chest Fly, Dumbbell Lateral Raise, Dumbbell Front Raise, Dumbbell Rear Delt Fly, Dumbbell Pullover, Dumbbell Bicep Curl, Hammer Curl, Dumbbell Tricep Extension, Dumbbell Row, Renegade Row, Turkish Get-up, Kettlebell Windmill, Bent Press, Back Squat, Kettlebell Swing
+- **reps · weight:** Back Squat, Front Squat, Overhead Squat, Zercher Squat, Deadlift, Romanian Deadlift, Sumo Deadlift, Snatch-grip Deadlift, Rack Pull, Good Morning, Hip Thrust, Barbell Bench Press, Barbell Incline Bench Press, Close-grip Bench Press, Barbell Floor Press, Overhead Press, Landmine Press, Barbell Row, Pendlay Row, T-Bar Row, Shrug, Back Rack Walking Lunge, Front Rack Walking Lunge, Overhead Walking Lunge, Skull Crusher, Barbell Bicep Curl, Thruster, Lat Pulldown, Seated Cable Row, Leg Press, Leg Curl, Leg Extension, Goblet Squat, Dumbbell Front Squat, Dumbbell Romanian Deadlift, Single-leg Romanian Deadlift, Kettlebell Deadlift, Suitcase Deadlift, Kettlebell Swing, Kettlebell Clean, Dumbbell Clean, Kettlebell High Pull, Dumbbell Bench Press, Dumbbell Incline Press, Dumbbell Floor Press, Dumbbell Overhead Press, Single-arm Overhead Press, Arnold Press, Dumbbell Thruster, Dumbbell Chest Fly, Dumbbell Lateral Raise, Dumbbell Front Raise, Dumbbell Rear Delt Fly, Dumbbell Pullover, Dumbbell Bicep Curl, Hammer Curl, Dumbbell Tricep Extension, Dumbbell Row, Renegade Row, Turkish Get-up, Kettlebell Windmill, Bent Press
 - **reps · weight or band:** Tricep Pushdown, Face Pull
-- **reps · bodyweight or weight:** Calf Raise, Bulgarian Split Squat, Hand-release Push-up, Diamond Push-up, Strict Handstand Push-up, Kipping Handstand Push-up, Ring Row, Rope Climb, Pistol Squat, Shrimp Squat, Reverse Lunge, Side Lunge, Step-up, GHD Back Extension, Push-up, Air Squat
+- **reps · bodyweight or weight:** Calf Raise, Bulgarian Split Squat, Push-up, Hand-release Push-up, Diamond Push-up, Strict Handstand Push-up, Kipping Handstand Push-up, Ring Row, Rope Climb, Air Squat, Pistol Squat, Shrimp Squat, Reverse Lunge, Side Lunge, Step-up, GHD Back Extension
 - **reps, time · bodyweight or weight:** Cossack Squat
 - **reps · bodyweight:** Pike Push-up, Wall Walk, Jumping Pull-up, Legless Rope Climb, Skin the Cat
 - **time · bodyweight:** Handstand Hold
 - **distance · bodyweight:** Handstand Walk
-- **reps · bodyweight or weight or band:** Dip, Bar Dip, Ring Dip, Strict Pull-up, Kipping Pull-up, Butterfly Pull-up, Chin-up, Chest-to-bar Pull-up, Bar Muscle-up, Ring Muscle-up, Pull-up
+- **reps · bodyweight or weight or band:** Dip, Bar Dip, Ring Dip, Pull-up, Strict Pull-up, Kipping Pull-up, Butterfly Pull-up, Chin-up, Chest-to-bar Pull-up, Bar Muscle-up, Ring Muscle-up
 - **time · bodyweight or weight:** Dead Hang, Ring Support Hold, Wall Sit
 - **reps, distance · bodyweight or weight:** Walking Lunge
 - **reps, time · bodyweight or weight or band:** Glute Bridge
 - **reps · bodyweight or band:** Nordic Hamstring Curl
 
-### Power
+#### Power
 
 - **reps · weight:** Power Clean, Squat Clean, Hang Power Clean, Hang Squat Clean, High Hang Power Clean, High Hang Squat Clean, Power Clean from Blocks, Clean Pull, Clean High Pull, Muscle Clean, Power Snatch, Squat Snatch, Hang Power Snatch, Hang Squat Snatch, High Hang Power Snatch, Power Snatch from Blocks, Snatch Pull, Snatch High Pull, Muscle Snatch, Snatch Balance, Sotts Press, Push Press, Push Jerk, Split Jerk, Jerk Balance, Behind the Neck Jerk, Clean & Jerk, Power Clean & Jerk, Clean & Push Jerk, Sumo Deadlift High Pull, Dumbbell Snatch, Kettlebell Snatch, Dumbbell Clean & Jerk, Dumbbell Push Press, Devil's Press, Ball Slam, Wall Ball, Medicine Ball Clean, Sandbag Clean, Sandbag Over Shoulder, D-Ball Over Shoulder, Atlas Stone Load
-- **reps · bodyweight:** Box Jump, Box Jump Over, Lateral Box Jump, Single-leg Box Jump, Depth Jump, Lateral Bound, Tuck Jump, Jump Lunge, Plyo Push-up, Burpee Box Jump, Burpee Box Jump Over, Bar-facing Burpee, Burpee Pull-up, Burpee
+- **reps · bodyweight:** Box Jump, Box Jump Over, Lateral Box Jump, Single-leg Box Jump, Depth Jump, Lateral Bound, Tuck Jump, Jump Lunge, Plyo Push-up, Burpee, Burpee Box Jump, Burpee Box Jump Over, Bar-facing Burpee, Burpee Pull-up
 - **reps · bodyweight or weight:** Box Step-over, Jump Squat
 - **reps, distance · bodyweight:** Broad Jump, Bounding, Burpee Broad Jump
 - **reps, distance · weight:** Sandbag Lunge, Tyre Flip
 
-### Cardio
+#### Cardio
 
 - **time, distance · bodyweight:** Run, Sprint, Incline Walk, Swim, Bear Crawl
 - **reps, time, distance · bodyweight:** Shuttle Run
@@ -212,7 +231,7 @@ different movement that happens to be built in.
 - **time, calories · bodyweight:** Stair Climber
 - **reps, time · bodyweight:** Jump Rope, Single Under, Double Under, Crossover, Triple Under, Battle Rope, Jumping Jack
 
-### Core
+#### Core
 
 - **reps · bodyweight:** Toes-to-bar, Knees-to-elbows, V-up, Tuck-up, Ab Wheel Rollout, Windshield Wiper, Reverse Crunch, Lying Leg Raise
 - **reps · bodyweight or weight:** Hanging Leg Raise, Sit-up, GHD Sit-up, Russian Twist, Crunch
@@ -223,7 +242,7 @@ different movement that happens to be built in.
 - **reps, time · weight or band:** Pallof Press
 - **reps · weight:** Landmine Rotation
 
-### Mobility
+#### Mobility
 
 - **reps · bodyweight:** Leg Swing, Squat to Stand
 - **reps, time · bodyweight:** Arm Circle, Inchworm, World's Greatest Stretch, 90/90 Hip Switch, Knee-to-wall Ankle Rock, Cat-Cow, Open Book Rotation, Quadruped Wrist Rock, Thread the Needle
@@ -237,16 +256,15 @@ different movement that happens to be built in.
 - **time · bodyweight or band:** Half-kneeling Hip Flexor Stretch
 - **reps · bodyweight or weight:** Jefferson Curl
 
-
 ## Examples
 
 **"EMOM 12: odd, 15 kettlebell swings at 24 kg; even, 12 calorie row"**
 
 ```json
 {
-  "graft": "import-v1",
-  "items": [
-    { "format": "EMOM", "rounds": 6, "rows": [
+  "importVersion": 1,
+  "blocks": [
+    { "format": "EMOM", "rounds": 6, "exercises": [
       { "exercise": "Kettlebell Swing", "reps": 15, "weight": 24, "unit": "kg" },
       { "exercise": "Row", "calories": 12 }
     ] }
@@ -259,18 +277,18 @@ thrusters at 95/65 lb and pull-ups, 10 minute cap)**
 
 ```json
 {
-  "graft": "import-v1",
+  "importVersion": 1,
   "name": "Cleans and Fran",
-  "items": [
+  "blocks": [
     { "name": "Cleans", "format": { "name": "E2MOM", "base": "interval" },
-      "rounds": 6, "work": 120, "rows": [
+      "rounds": 6, "work": 120, "exercises": [
       { "superset": [
         { "exercise": "Power Clean", "reps": 3, "weight": 70, "unit": "kg" },
         { "exercise": "Burpee", "reps": 6 }
       ] }
     ] },
     { "rest": 180 },
-    { "name": "Fran", "format": "For Time", "timeCap": 600, "rounds": 3, "rows": [
+    { "name": "Fran", "format": "For Time", "timeCap": 600, "rounds": 3, "exercises": [
       { "exercise": "Thruster", "reps": [21, 15, 9], "weight": 95, "unit": "lb" },
       { "exercise": "Strict Pull-up", "reps": [21, 15, 9] }
     ] }
@@ -283,15 +301,15 @@ rest. Finish with 3 rounds of 10 Lu raises and a 30 second hollow hold."**
 
 ```json
 {
-  "graft": "import-v1",
-  "items": [
-    { "name": "Warm-up", "format": { "name": "Warm-up", "base": "timed" }, "rows": [
+  "importVersion": 1,
+  "blocks": [
+    { "name": "Warm-up", "format": { "name": "Warm-up", "base": "timed" }, "rounds": 1, "exercises": [
       { "exercise": "BikeErg", "time": 300 }
     ] },
-    { "name": "Strength", "format": "Strength", "setRest": 120, "rows": [
+    { "name": "Strength", "format": "Strength", "setRest": 120, "exercises": [
       { "exercise": "Back Squat", "sets": 5, "reps": 5, "weight": 100, "unit": "kg" }
     ] },
-    { "name": "Finisher", "format": { "name": "3 Rounds", "base": "timed" }, "rounds": 3, "rows": [
+    { "name": "Finisher", "format": { "name": "3 Rounds", "base": "timed" }, "rounds": 3, "exercises": [
       { "exercise": { "name": "Lu Raise", "category": "strength",
                       "targets": ["reps"], "loads": ["weight"] }, "reps": 10 },
       { "exercise": "Hollow Hold", "time": 30 }
